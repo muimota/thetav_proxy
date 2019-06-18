@@ -2,10 +2,11 @@ const http = require('http')
 const server = http.createServer()
 
 
-console.log("\nRICOH theta Y camera proxy\n2019 @muimota")
+console.log("\nRICOH theta V camera proxy\n2019 @muimota")
 
 server.on('request', (_req,_res) =>
   {
+
     const data = '{"name": "camera.getLivePreview"}'
 
     const options = {
@@ -20,7 +21,13 @@ server.on('request', (_req,_res) =>
     }
 
     const req = http.request(options, (res) => {
-      _res.headers = res.headers
+
+      _res.writeHead(200,
+        {'Connection': 'Keep-Alive',
+         'Content-Type': 'multipart/x-mixed-replace; boundary="---osclivepreview---"',
+         'X-Content-Type-Options':'nosniff',
+         'Transfer-Encoding': 'Chunked'})
+
       res.on('data', (d) => {
         _res.write(d)
       })

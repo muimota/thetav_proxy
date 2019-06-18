@@ -9,11 +9,18 @@ The mjpeg stream is 1024x512
 
 * Put camera in direct mode (blue wifi light)
 * Connect the computer to the camera's AP
-* run the script
+* run the script `node main.js`
+
 
 ## View the stream
 
-* In [VLC](https://www.videolan.org/index.html) open ***http://127.0.0.1:8000*** It has a delay due the VLC buffering
+* Browser to `http://127.0.0.1:8000` [Chorme](http://www.google.com/chrome) and [Firefox](http://firefox.org) suported
+* In [VLC](https://www.videolan.org/index.html) open `http://127.0.0.1:8000` It has a delay due the VLC buffering
 * In [gstreamer](https://gstreamer.freedesktop.org/)`gst-launch-1.0 -v souphttpsrc location=http://127.0.0.1:8000 ! decodebin ! autovideosink`
 
-
+## headers
+```HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Type: multipart/x-mixed-replace; boundary="---osclivepreview---"
+X-Content-Type-Options: nosniff
+Transfer-Encoding: Chunked```
